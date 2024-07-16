@@ -77,6 +77,10 @@ class Ollama(CustomLLM):
         default=False,
         description="Whether to use JSON mode for the Ollama API.",
     )
+    system: str = Field(
+        default=None,
+        description="The system message to use in the API calls."
+    )
     additional_kwargs: Dict[str, Any] = Field(
         default_factory=dict,
         description="Additional model parameters for the Ollama API.",
@@ -121,6 +125,7 @@ class Ollama(CustomLLM):
             ],
             "options": self._model_kwargs,
             "stream": False,
+            "system": self.system,
             **kwargs,
         }
 
@@ -163,6 +168,7 @@ class Ollama(CustomLLM):
             ],
             "options": self._model_kwargs,
             "stream": True,
+            "system": self.system,
             **kwargs,
         }
 
@@ -216,6 +222,7 @@ class Ollama(CustomLLM):
             ],
             "options": self._model_kwargs,
             "stream": False,
+            "system": self.system,
             **kwargs,
         }
 
@@ -251,6 +258,7 @@ class Ollama(CustomLLM):
             "model": self.model,
             "options": self._model_kwargs,
             "stream": False,
+            "system": self.system,
             **kwargs,
         }
 
@@ -280,6 +288,7 @@ class Ollama(CustomLLM):
             "model": self.model,
             "options": self._model_kwargs,
             "stream": False,
+            "system": self.system,
             **kwargs,
         }
 
@@ -309,6 +318,7 @@ class Ollama(CustomLLM):
             "model": self.model,
             "options": self._model_kwargs,
             "stream": True,
+            "system": self.system,
             **kwargs,
         }
 
@@ -346,6 +356,7 @@ class Ollama(CustomLLM):
             "model": self.model,
             "options": self._model_kwargs,
             "stream": True,
+            "system": self.system,
             **kwargs,
         }
 
